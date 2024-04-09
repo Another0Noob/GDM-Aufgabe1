@@ -59,6 +59,10 @@ public class GLDM_U1_S0592209 implements PlugIn {
 			generateHorizontalBWGradient(width, height, pixels);
 		}
 
+		if ( choice.equals("Horiz. Schwarz/Rot vert.") ) {
+			generateDiagonalBWGradient(width, height, pixels);
+		}
+
 		////////////////////////////////////////////////////////////////////
 		
 		// neues Bild anzeigen
@@ -118,9 +122,27 @@ public class GLDM_U1_S0592209 implements PlugIn {
 			for (int x=0; x<width; x++) {
 				int pos = y*width + x; // Arrayposition bestimmen
 
-				int r = x*(width/255);
-				int g = x*(width/255);
-				int b = x*(width/255);
+				int r = x*255/width;
+				int g = x*255/width;
+				int b = x*255/width;
+
+				// Werte zurueckschreiben
+				pixels[pos] = 0xFF000000 | (r << 16) | (g << 8) |  b;
+			}
+		}
+
+	}
+
+	private void generateDiagonalBWGradient(int width, int height, int[] pixels) {
+		// Schleife ueber die y-Werte
+		for (int y=0; y<height; y++) {
+			// Schleife ueber die x-Werte
+			for (int x=0; x<width; x++) {
+				int pos = y*width + x; // Arrayposition bestimmen
+
+				int r = x*255/width;
+				int g = x*255/width;
+				int b = x*255/width;
 
 				// Werte zurueckschreiben
 				pixels[pos] = 0xFF000000 | (r << 16) | (g << 8) |  b;
