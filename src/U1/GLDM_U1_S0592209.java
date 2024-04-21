@@ -16,9 +16,10 @@ public class GLDM_U1_S0592209 implements PlugIn {
 		"Gelbes Bild", 
 		"Belgische Fahne",
 		"Schwarz/Weiss Verlauf",
+		"Horiz. Weiss/Schwarz Verlauf",
 		"Horiz. Schwarz/Rot vert. Schwarz/Blau Verlauf",
 		"USA Fahne",
-		"Japanische Fahne"
+		"Tschechische Fahne"
 	};
 	
 	private String choice;
@@ -59,8 +60,20 @@ public class GLDM_U1_S0592209 implements PlugIn {
 			generateHorizontalBWGradient(width, height, pixels);
 		}
 
-		if ( choice.equals("Horiz. Schwarz/Rot vert.") ) {
+		if ( choice.equals("Horiz. Weiss/Schwarz Verlauf") ) {
 			generateDiagonalBWGradient(width, height, pixels);
+		}
+
+		if ( choice.equals("Horiz. Schwarz/Rot vert. Schwarz/Blau Verlauf") ) {
+			generateBlackRedBlueGradient(width, height, pixels);
+		}
+
+		if ( choice.equals("USA Fahne") ) {
+			generateUSA(width, height, pixels);
+		}
+
+		if ( choice.equals("Tschechische Fahne") ) {
+			generateCzechFlag(width, height, pixels);
 		}
 
 		////////////////////////////////////////////////////////////////////
@@ -140,16 +153,94 @@ public class GLDM_U1_S0592209 implements PlugIn {
 			for (int x=0; x<width; x++) {
 				int pos = y*width + x; // Arrayposition bestimmen
 
-				int r = x*255/width;
-				int g = x*255/width;
-				int b = x*255/width;
+				int value = (x + y) * 255 / (width + height);
+				int r = 255 - value;
+				int g = 255 - value;
+				int b = 255 - value;
 
 				// Werte zurueckschreiben
 				pixels[pos] = 0xFF000000 | (r << 16) | (g << 8) |  b;
 			}
 		}
-
 	}
+
+	private void generateBlackRedBlueGradient(int width, int height, int[] pixels) {
+		// Schleife ueber die y-Werte
+		for (int y=0; y<height; y++) {
+			// Schleife ueber die x-Werte
+			for (int x=0; x<width; x++) {
+				int pos = y*width + x; // Arrayposition bestimmen
+
+
+				int r = x*255/width;
+				int g = (x + y) * 255 / (width + height);
+				int b = y*255/height;
+
+				// Werte zurueckschreiben
+				pixels[pos] = 0xFF000000 | (r << 16) | (g << 8) |  b;
+			}
+		}
+	}
+
+	private void generateUSA(int width, int height, int[] pixels) {
+		// Schleife ueber die y-Werte
+		for (int y=0; y<height; y++) {
+			// Schleife ueber die x-Werte
+			for (int x=0; x<width; x++) {
+				int pos = y*width + x; // Arrayposition bestimmen
+
+				int r = 255;
+				int g = 255;
+				int b = 255;
+
+				if (y / (height/13) % 2 == 0) {
+					r = 255;
+					g = 0;
+					b = 0;
+				}
+
+				if (x <= (2.0/5.0*width) && y <= (7.0/13.0*height)) {
+					r = 0;
+					g = 0;
+					b = 255;
+				}
+
+
+				// Werte zurueckschreiben
+				pixels[pos] = 0xFF000000 | (r << 16) | (g << 8) |  b;
+			}
+		}
+	}
+
+	private void generateCzechFlag(int width, int height, int[] pixels) {
+		// Schleife ueber die y-Werte
+		for (int y=0; y<height; y++) {
+			// Schleife ueber die x-Werte
+			for (int x=0; x<width; x++) {
+				int pos = y*width + x; // Arrayposition bestimmen
+
+				int r = 255;
+				int g = 255;
+				int b = 255;
+
+				if (y > height/2) {
+					r = 255;
+					g = 0;
+					b = 0;
+				}
+
+				if (x <= y && x <= height - y) {
+					r = 0;
+					g = 0;
+					b = 255;
+				}
+
+				// Werte zurueckschreiben
+				pixels[pos] = 0xFF000000 | (r << 16) | (g << 8) |  b;
+			}
+		}
+	}
+
 
 	private void dialog() {
 		// Dialog fuer Auswahl der Bilderzeugung
