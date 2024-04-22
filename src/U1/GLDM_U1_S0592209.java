@@ -16,7 +16,7 @@ public class GLDM_U1_S0592209 implements PlugIn {
 		"Gelbes Bild", 
 		"Belgische Fahne",
 		"Schwarz/Weiss Verlauf",
-		"Horiz. Weiss/Schwarz Verlauf",
+		"Diagonal Weiss/Schwarz Verlauf",
 		"Horiz. Schwarz/Rot vert. Schwarz/Blau Verlauf",
 		"USA Fahne",
 		"Tschechische Fahne"
@@ -60,7 +60,7 @@ public class GLDM_U1_S0592209 implements PlugIn {
 			generateHorizontalBWGradient(width, height, pixels);
 		}
 
-		if ( choice.equals("Horiz. Weiss/Schwarz Verlauf") ) {
+		if ( choice.equals("Diagonal Weiss/Schwarz Verlauf") ) {
 			generateDiagonalBWGradient(width, height, pixels);
 		}
 
@@ -173,7 +173,7 @@ public class GLDM_U1_S0592209 implements PlugIn {
 
 
 				int r = x*255/width;
-				int g = (x + y) * 255 / (width + height);
+				int g = 0;
 				int b = y*255/height;
 
 				// Werte zurueckschreiben
@@ -194,15 +194,15 @@ public class GLDM_U1_S0592209 implements PlugIn {
 				int b = 255;
 
 				if (y / (height/13) % 2 == 0) {
-					r = 255;
-					g = 0;
-					b = 0;
+					r = 178;
+					g = 34;
+					b = 52;
 				}
 
 				if (x <= (2.0/5.0*width) && y <= (7.0/13.0*height)) {
-					r = 0;
-					g = 0;
-					b = 255;
+					r = 60;
+					g = 59;
+					b = 110;
 				}
 
 
@@ -224,15 +224,15 @@ public class GLDM_U1_S0592209 implements PlugIn {
 				int b = 255;
 
 				if (y > height/2) {
-					r = 255;
-					g = 0;
-					b = 0;
+					r = 215;
+					g = 20;
+					b = 26;
 				}
 
 				if (x <= y && x <= height - y) {
-					r = 0;
-					g = 0;
-					b = 255;
+					r = 17;
+					g = 69;
+					b = 126;
 				}
 
 				// Werte zurueckschreiben
