@@ -199,7 +199,7 @@ public class GLDM_U1_S0592209 implements PlugIn {
 					b = 52;
 				}
 
-				if (x <= (int)(2.0/5.0*width) && y <= (int)(7.0/13.0*height)) {
+				if (x <= (2.0/5.0*width) && y <= (7.0/13.0*height)) {
 					r = 60;
 					g = 59;
 					b = 110;
