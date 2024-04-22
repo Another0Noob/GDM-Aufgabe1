@@ -110,16 +110,16 @@ public class GLDM_U1_S0592209 implements PlugIn {
 				int g = 0;
 				int b = 0;
 
-                if (x > width/3 && x < width * 2/3 ) {
-					r = 255;
-					g = 255;
-					b = 0;
+                if (x >= width/3 && x <= width * 2/3 ) {
+					r = 253;
+					g = 218;
+					b = 36;
                 }
 
 				if (x >= width * 2/3 ) {
-					r = 255;
-					g = 0;
-					b = 0;
+					r = 239;
+					g = 51;
+					b = 64;
 				}
 
                 // Werte zurueckschreiben
