@@ -135,9 +135,9 @@ public class GLDM_U1_S0592209 implements PlugIn {
 			for (int x=0; x<width; x++) {
 				int pos = y*width + x; // Arrayposition bestimmen
 
-				int r = x*255/width;
-				int g = x*255/width;
-				int b = x*255/width;
+				int r = x*255/(width -1);
+				int g = x*255/(width -1);
+				int b = x*255/(width -1);
 
 				// Werte zurueckschreiben
 				pixels[pos] = 0xFF000000 | (r << 16) | (g << 8) |  b;
@@ -153,7 +153,7 @@ public class GLDM_U1_S0592209 implements PlugIn {
 			for (int x=0; x<width; x++) {
 				int pos = y*width + x; // Arrayposition bestimmen
 
-				int value = (x + y) * 255 / (width + height);
+				int value = (x + y) * 255 / (width + height - 2);
 				int r = 255 - value;
 				int g = 255 - value;
 				int b = 255 - value;
@@ -172,9 +172,9 @@ public class GLDM_U1_S0592209 implements PlugIn {
 				int pos = y*width + x; // Arrayposition bestimmen
 
 
-				int r = x*255/width;
+				int r = x*255/(width - 1);
 				int g = 0;
-				int b = y*255/height;
+				int b = y*255/(height - 1);
 
 				// Werte zurueckschreiben
 				pixels[pos] = 0xFF000000 | (r << 16) | (g << 8) |  b;
@@ -193,7 +193,7 @@ public class GLDM_U1_S0592209 implements PlugIn {
 				int g = 255;
 				int b = 255;
 
-				if (y / (height/13) % 2 == 0) {
+				if (y / Math.round((float) height /13) % 2 == 0) {
 					r = 178;
 					g = 34;
 					b = 52;
